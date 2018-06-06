@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<title>Document</title>
+	<style>
+		body{
+			background:#424242;
+			
+			color:white;
+		}
+		.dif{
+			 margin-top: 40px;
+			width:90% ; 
+			
+			outline-color: white;
+			margin-left: 5% ;
+		}
+		.inp{
+			color: white;
+		}
+		p{
+			color: black;
+			
+		}
+	</style>
+</head>
+
+<body>
+<nav style="background: #f57c00; text-align: center; font-size: 20px" >
+	ХАРЫСХАЛ
+		<i class="material-icons" id="backBtn" style="display:none">arrow_back</i>
+	</nav>
+  <div class="row">
+    <div class="col s12 m5">
+      <div class="card-panel ">
+       <a href="#user" ><img class="circle" style="width:50%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdTaP75Yzn1EdXd8cpoEaw0vJfuyt1YqlWSf8ZtJVPvX-q0SmH"></a>
+       <div class="col s6" style="margin-bottom: 10px">
+      
+     
+       
+        <p> name: Жуковская Светлана </p>
+         
+        <p>physycaly limitation: leg amputated</p>
+        <p>diagnosis: cancer </p>
+         
+        <p>phone of parent: +7954487</p>
+         
+        
+        
+       </div>
+        
+      </div>
+    </div>
+  </div>
+  <div style="text-align: center">
+  	<a href="#" class="btn" id="add" style="background: #f57c00; width:80%; margin-top: 40px; margiin-left:10%">добавить обьявление</a>
+  </div>
+	
+	<div id="addPostDiv" style="display: none" class="dif">
+	<form action="/addPost">
+		<input type="text" placeholder="от куда" id="from">
+		<input type="text" placeholder="куда" id="to">
+		<input type="text" placeholder="описание" id="description">
+		
+		<a href="#" class="btn" id="addPostBtn">добавить</a>
+		</form>
+	</div>
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+	<script>
+		$("#add").on("click", function() {
+			$("#addPostDiv").show();
+		});
+		$("#addPostBtn").on("click", function() {
+			$.ajax({
+				url: "http://127.0.0.1:8000/addPost",
+				data: {
+					
+					"description": $("#description").val(),
+					
+					"from": $("#from").val(),
+					"to": $("#to").val(),
+					"user_id":localStorage.user_id,				
+				},
+				success: function(data) {
+					console.log(data);
+					
+
+				}
+			});
+		});
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<title>Document</title>
+	<style>
+		.dif{
+			 margin-top: 40px;
+			width:90% ; 
+			
+			outline-color: white;
+			margin-left: 5% ;
+		}
+		body{
+			background:#424242;
+			text-align: center;
+			color:white;
+		}
+	</style>
+</head>
+
+<body>
+	<nav style="background: #f57c00; margin-top: 0; font-size: 20px" >
+	ХАРЫСХАЛ
+		<i class="material-icons" id="backBtn" style="display:none">arrow_back</i>
+	</nav>
+	<div class="dif">
+		<input type="text" placeholder="Имя родителя" id="nameMain" >
+		<input type="text" placeholder="Фамилия родителя" id="lastnameMain">
+		<input type="text" placeholder="Контактные данные" id="contact">
+		<input type="text" placeholder="Имя ребенка" id="nameChild">
+		<input type="text" placeholder="Фамилия ребенка" id="lastnameChild">
+		<input type="text" placeholder="Диагноз" id="diagnosis">
+		<input type="text" placeholder="Физические ограничения" id="limitation">
+		<a href="#" class="btn" id="endUpN" style="background: #f57c00">
+			Создать страницу
+		</a>
+		
+	</div>
+		
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+	<script>
+		
+		
+		$("#endUpN").on("click", function(){
+			$.ajax({
+				url: "http://127.0.0.1:8000/endUpN",
+				data: {
+					"nameMain": $("#nameMain").val(),
+					"lastnameMain": $("#lastnameMain").val(),
+					"nameChild": $("#nameChild").val(),
+					"lastnameChild": $("#lastnameChild").val(),
+					"contact": $("#contact").val(),
+					"diagnosis": $("#diagnosis").val(),
+					"limitation": $("#limitation").val(),
+					
+					
+				},
+				success: function(data){
+				console.log(data);
+				location.replace("pageN.html");
+					
+				}
+			});
+		});
+	</script>
+</body>
+</html>

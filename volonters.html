@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<style>
+		body{
+			background:#424242;
+			text-align: center;
+			color:white;
+		}
+		.dif{
+			 margin-top: 40px;
+			width:90% ; 
+			
+			outline-color: white;
+			margin-left: 5% ;
+		}
+		
+	</style>
+</head>
+<body>
+	<nav style="background: #f57c00; margin-top: 0; font-size: 20px" >
+	ХАРЫСХАЛ
+		<i class="material-icons" id="backBtn" style="display:none">arrow_back</i>
+	</nav>
+	<div class="dif">
+		<input type="text" placeholder="Имя" id="name">
+		<input type="text" placeholder="Фамилия" id="lastname">
+		<input type="text" placeholder="Паспортные данные" id="passport">
+		<input type="text" placeholder="Контактные данные(моб. тел)" id="contact">
+		<a href="#" class="btn" id="endUpV" style="background: #f57c00"; margin-top: 20px>Я волонтер!</a>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+	<script>
+		$("#endUpV").on("click", function(){
+			$.ajax({
+				url: "http://127.0.0.1:8000/endUpV",
+				data: {
+					"name": $("#name").val(),
+					"lastname": $("#lastname").val(),
+					
+					"contact": $("#contact").val(),
+					"passport":$("#passport").val(),
+					
+					
+				},
+				success: function(data){
+					location.replace("pageV.html");
+				
+					
+				}
+			});
+		});
+	</script>
+</body>
+</html>

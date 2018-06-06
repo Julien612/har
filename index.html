@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<style>
+		body{
+			background:#424242;
+			text-align: center;
+			color:white;
+		}
+		.dif{
+			 margin-top: 40px;
+			width:90% ; 
+			
+			outline-color: white;
+			margin-left: 5% ;
+		}
+		.inp{
+			color: white;
+		}
+	</style>
+</head>
+
+<body>
+
+
+	<nav style="background: #f57c00; margin-top: 0; font-size: 20px" >
+	ХАРЫСХАЛ
+		<i class="material-icons" id="backBtn" style="display:none">arrow_back</i>
+	</nav>
+
+
+	<div style="display: none; " id="signIn" class="dif">
+		<input type="text" id="loginIn" placeholder="login" class="inp" >
+		<input type="text" id="passwordIn" placeholder="password" class="inp">
+		<br><a href="#" class="btn" id="signInbtn" style="background: #f57c00; width:80%">войти</a>
+		<br><a href="#" id="forgotpass" style="margin-top: 20px">забыл пароль</a>
+
+	</div>
+
+
+
+	<div style="display: none" id="signUp" class="dif">
+		Регистрация
+		<input type="text" id="loginUp" placeholder="login" class="inp" >
+		<input type="email" id="emailUp" placeholder="email" class="inp">
+		<input type="password" id="passwordUp" placeholder="password" class="inp">
+		<a href="#" class="btn" id="signUpbtn" style="background: #f57c00">зарегистрироваться</a>
+		<p id="btnIn" class="bttn" style="display: block ; "> у меня уже есть аккаунт</p>
+
+	</div>
+	<div style="display:none" id="character">
+		<br><a href="#" class="btn" id="vol" style="margin-top: 40px;background: #f57c00; width: 80%" >  я волонтер</a>
+		<br><a href="#" class="btn" id="needhlp" style="background: #f57c00;margin-top: 40px; width: 80%"> я нуждаюсь в помощи</a>
+	</div>
+
+
+	<!--<div style="dislay:none" id="divforgot">
+		<input type="email" placeholder="email" id="forgotemail">
+		<h6>или</h6>
+		<input type="number" placeholder="phone number" id="forgotnumber">
+		<a href="#" id="forgotforgotpass">click</a>
+	</div>-->
+
+
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			if(localStorage.hasOwnProperty("user_id")) {
+				
+				$.ajax({
+					url:"http://127.0.0.1:8000/ajax",
+					data: "",
+					succes: function(data) {
+
+					}
+				});
+			} else {
+				$("#signUp").show();
+			};
+
+		});
+		$("#signUpbtn").on("click", function(){
+
+			$.ajax({
+				url: "http://127.0.0.1:8000/signUp",
+				data: {
+					"login": $("#loginUp").val(),
+					"password": $("#passwordUp").val(),
+					"email": $("#emailUp").val(),
+				},
+				success: function(data){
+					localStorage.setItem("user_id", data.id);
+				$("#signUp").hide();
+					$("#character").show();
+					
+				}
+			});
+		});
+		$("#vol").on("click", function(){
+			location.replace("volonters.html");
+		});
+		$("#needhlp").on("click", function(){
+			location.replace("needahlp.html");
+		});
+		$("#btnIn").on("click", function() {
+			$("#signIn").show();
+			$("#signUp").hide();
+			$("#backBtn").show();
+
+		});
+		$("#backBtn").on("click", function() {
+			$("#signIn").hide();
+			$("#signUp").show();
+			$("#backBtn").hide();
+		});
+
+
+		
+		
+		$("#signInbtn").on("click", function(){
+			$.ajax({
+				url: "http://127.0.0.1:8000/signIn",
+				data: {
+					"login": $("#loginIn").val(),
+					"password": $("#passwordIn").val(),
+					
+				},
+				success: function(data){
+					console.log(data);
+				
+					
+				}
+			});
+		});
+		
+		/*$("#forgotpass").on("click", function() {
+			$("#divforgot").show();
+			S("#backBtn").show();
+			$("#signIn").hide();
+			$("#signUp").hide();
+
+		});
+		$("#forgotforgotpass").on("clicl", function() {
+			$("#divforgot").hide();
+			if (localStorage.hasOwnProperty("user_email")) {
+
+				$.ajax({
+					url: "http://127.0.0.1:8000/ajax",
+					data: "",
+					succes: function(data) {
+					}
+				});*/
+
+		/*}else{(localStorage.hasOwnProperty("user_phone")) {
+				$.ajax({
+					url: "http://127.0.0.1:8000/ajax",
+					data: "",
+					succes: function(data) {
+
+					}
+				});
+
+			}else {
+				alert("приносим извинения, но вас нет в нашей базы данных, зарегестрируйтесть повторно")
+			}
+		});*/
+
+	</script>
+</body>
+
+</html>

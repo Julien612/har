@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<style>
+		body {
+			background: #424242;
+			color: white;
+		}
+		
+		.roww {
+			margin-top: 40px;
+			width: 90%;
+			background: #616161;
+			outline-color: white;
+			margin-left: 5%;
+		}
+		.t{
+			font-size: 20px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<nav style="background: #f57c00; margin-top: 0; font-size: 20px;  text-align: center">
+
+		ХАРЫСХАЛ
+
+		<i class="material-icons" id="backBtn" style="display:none">arrow_back</i>
+		
+		
+  <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons" style="position: absolute">menu</i></a>
+		
+	</nav>
+	
+	
+	
+	
+	<ul id="slide-out" class="sidenav">
+    <li><div class="user-view">
+      <div class="background">
+        <img src="http://blagoslovennya.org/wp-content/uploads/2015/10/43414-1u.jpg">
+      </div>
+      <a href="#user"><img class="circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdTaP75Yzn1EdXd8cpoEaw0vJfuyt1YqlWSf8ZtJVPvX-q0SmH"></a>
+      
+      
+      
+      <a href="#name"><span class="black-text name" class="lol" >Дмитрий Хандогин</span></a>
+      <a href="#email"><span class="black-text email" class="kek">dimakhan@gmail.com</span></a>
+      
+      
+      
+    </div></li>
+    
+   
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Настройки</a></li>
+    <li><a class="waves-effect" href="#!">Редактировать</a></li>
+    <li><a class="waves-effect" href="#!">Выйти</a></li>
+  </ul>
+  
+  
+  
+  
+  
+  
+  
+  
+
+	<p style="font-size: 20px">Все объявления :</p>
+<div class="divider"></div>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+	<script>
+		 $(document).ready(function(){
+			
+    		$('.sidenav').sidenav();
+			/* $.ajax({
+				 url: "http://127.0.0.1:8000/name",
+				 success: function(arg1) {
+					 var name = document.querySelector(".lol");
+					 name.innerHTML=arg1;
+					/* var email = document.querySelector(".kek");
+					 name.innerHTML=arg2;
+				 
+				 data:{
+					 
+				 }
+			 });*/
+  });
+		
+		$.ajax({
+			url: "http://127.0.0.1:8000/ads",
+			success: function(arg) {
+				console.log(arg);
+				for (var i = 0; i < arg.length; i++) {
+					var main = document.createElement('div');
+					main.classList.add('roww');
+					main.classList.add('card');
+					main.classList.add('row');
+					document.body.appendChild(main);
+
+					var parent = document.createElement('div');
+					//parent.classList.add('row');
+					parent.style.width=70+"%";
+					main.appendChild(parent);
+					parent.style.marginLeft=5+"%";
+					parent.style.marginTop=5+"px";
+					
+					/*var man=document.createElement('a');
+					man.appendChild(main);
+					man.style.width=30+"%";
+					var img=document.createElement('img');
+					img.appendChild(main);
+					img.style.background=url()*/
+					
+					
+					var span = document.createElement('p');
+					span.classList.add('t');
+					parent.appendChild(span);
+					span.innerHTML = "откуда : " + arg[i].from;
+					
+					var span2 = document.createElement('p');
+					parent.appendChild(span2);
+					span2.classList.add('t');
+					span2.innerHTML = "куда : " + arg[i].to;
+					
+					var span3 = document.createElement('p');
+					parent.appendChild(span3);
+					span3.classList.add('t');
+					span3.innerHTML = "описание : " + arg[i].description;
+
+
+				};
+			},
+			data: {
+
+			}
+		});
+
+	</script>
+</body>
+
+</html>
